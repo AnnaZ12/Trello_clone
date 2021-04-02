@@ -20,7 +20,6 @@ const Board = ({ ...item }) => {
 
   let myBoard: BoardsProps | undefined = boards.find((item: BoardsProps) => item.id === boardIdx);
 
-
   const [open, setOpen] = useState(false);
   const [listName, setListName] = useState('');
   const [editText, setEditText] = useState(false);
@@ -35,6 +34,18 @@ const Board = ({ ...item }) => {
   const onEditBoard = () => {
     editBoard(boardIdx, listEditableName)
     setEditText(!editText);
+  }
+
+  /** закрытие формы редактирования названия доски при потере фокуса */
+  const handleOnBlur = () => {
+    setEditText(!editText)
+    setListEditableName(myBoard!.name);
+  }
+
+  /** закрытие формы добавления нового листа при потере фокуса */
+  const handleListOnBlur = () => {
+    setOpen(!open);
+    setListName('');
   }
 
   return (
@@ -58,6 +69,7 @@ const Board = ({ ...item }) => {
                     setEditText(!editText)
                   }
                 }}
+                onBlur={handleOnBlur}
               />
             ) : (
               <div onDoubleClick={() => onEditBoard()} >
@@ -83,6 +95,7 @@ const Board = ({ ...item }) => {
                       const keyCode = event.keyCode ? event.keyCode : event.which;
                       keyCode === 13 && addList(myBoard!.id);
                     }}
+                    onBlur={handleListOnBlur}
                   />
                   <div className="list__new_block">
                     <button className="list__new_btn" onClick={() => addList(myBoard!.id)}

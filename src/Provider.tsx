@@ -58,8 +58,6 @@ const initialState = {
   editTask: (boardId: string, listId: string, taskId: string, name?: string): void => { },
 }
 
-
-
 export const BoardContext = React.createContext<BoardContextProps>(initialState);
 const { Provider } = BoardContext;
 

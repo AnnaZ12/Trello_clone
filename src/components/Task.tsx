@@ -39,7 +39,6 @@ const Task: React.FC<TaskPropsComponent> = ({ item, index, listId }: TaskPropsCo
     console.log('open')
   }
 
-  console.log(listId)
   return (
     <Draggable draggableId={id} index={index} key={id}>
       {provided => (
@@ -81,7 +80,6 @@ const Task: React.FC<TaskPropsComponent> = ({ item, index, listId }: TaskPropsCo
                 togglePopup={() => togglePopup()}
               />
             }
-
           </div>
         </div>
       )}
