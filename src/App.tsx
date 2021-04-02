@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from 'react'
+import { Switch, Route } from "react-router-dom";
+import HomePage from './HomePage';
+import Board from './components/Board';
+import { BoardProvider } from './Provider';
+import { BoardContext, BoardsProps } from './Provider';
 
-function App() {
+const App: React.FC = () => {
+
+  const { boards } = useContext(BoardContext);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Switch>
+        <BoardProvider>
+          <Route exact path='/'><HomePage /></Route>
+          <Route path='/board'><Board /></Route>
+        </BoardProvider>
+      </Switch>
     </div>
-  );
+  )
 }
 
 export default App;
